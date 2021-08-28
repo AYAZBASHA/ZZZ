@@ -1,0 +1,20 @@
+# docker github actions
+name: Docker-CI
+on:
+     push:
+       branches: [ master ]
+     pull_request:
+       branches: [ master ]
+jobs:
+     push_to_registries:
+       name: Push Docker to multiple registeries
+       runs-on: ubuntu-latest
+       steps:
+           - name: Checkout
+             uses: actions/checkout@v2
+           - name: Build & Publish
+             uses: VaultVulp/gp-docker-action@1.1.7
+             with:
+                github-token: ${{ secrets.TOKEN }}
+                image-name: myapp
+                image-tag: v1 
